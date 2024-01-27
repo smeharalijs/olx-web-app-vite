@@ -8,8 +8,13 @@ function Sign() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  function signin() {
-    loginApp({ email, password });
+  async function signin() {
+    try {
+      await loginApp({ email, password });
+      navigate('/')
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -62,7 +67,7 @@ function Sign() {
         </div>
 
         <div className="bg-gray-200 my-5 p-2 flex justify-center cursor-pointer">
-          <button className="" onClick={signin}>
+          <button className="" onClick={signin} >
             <h1 className="">Login</h1>
           </button>
         </div>
@@ -73,8 +78,8 @@ function Sign() {
               className="text-blue-600 cursor-pointer"
               onClick={() => navigate("/register")}
             >
-              Registered here
-            </span>{" "}
+              Register here
+            </span>
           </h3>
         </div>
       </div>

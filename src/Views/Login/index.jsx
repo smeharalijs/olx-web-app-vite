@@ -1,6 +1,7 @@
 import olxLogo from "../../Components/Header/olxlogo.png";
 import { useNavigate } from "react-router-dom";
 
+
 function Login() {
   const navigate = useNavigate()
 
@@ -45,7 +46,7 @@ function Login() {
                 src="https://w7.pngwing.com/pngs/543/934/png-transparent-google-app-logo-google-logo-g-suite-google-text-logo-circle.png"
                 alt=""
               />
-              <h1 className="text-center ">Continew with google</h1>
+              <h1 className="text-center ">Continue with google</h1>
             </div>
           </div>
           <div className="my-2 p-2 border-2 border-black rounded-md hover:border-4 hover:border-black ">
@@ -55,7 +56,7 @@ function Login() {
                 src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Facebook_Logo_2023.png"
                 alt=""
               />
-              <h1 className="text-center">Continew with Facebook</h1>
+              <h1 className="text-center">Continue with Facebook</h1>
             </div>
           </div>
           <div className="my-2 p-2 border-2 border-black rounded-md hover:border-4 hover:border-black ">
@@ -65,7 +66,7 @@ function Login() {
                 src="https://i.pinimg.com/736x/82/ee/a2/82eea2c87dc9a870eb5a354eae996b9f.jpg"
                 alt=""
               />
-              <h1 className="text-center" onClick={()=>navigate('/signin')}>Continew with Email</h1>
+              <h1 className="text-center" onClick={()=>navigate('/signin')}>Continue with Email</h1>
             </div>
           </div>
           <div className="my-2 p-2 border-2 border-black rounded-md hover:border-4 hover:border-black ">
@@ -75,7 +76,7 @@ function Login() {
                 src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/phone-512.png"
                 alt=""
               />
-              <h1 className="text-center">Continew with Phone</h1>
+              <h1 className="text-center">Continue with Phone</h1>
             </div>
           </div>
         </div>

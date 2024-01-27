@@ -1,15 +1,25 @@
 // import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Mydd from "../Myadd";
 
+
+import banner from './banner.png'
 import './index.css'
 
 function Dashboard() {
   //   const navigate = useNavigate();
   const [product, setProduct] = useState([]);
 
+
+
+
   useEffect(() => {
     getProduct();
   }, []);
+
+
+
+
 
   const getProduct = () => {
     fetch("https://dummyjson.com/products")
@@ -27,13 +37,13 @@ function Dashboard() {
     <div className="md:px-1">
       <div className="flex content-center">
         <img
-          className="my-[20px] md:my-[50px] m-auto md:m-auto w-[80%] md:w-[70%] "
-          src="https://lh4.googleusercontent.com/7uUaexYudWdalU4nenfqPgU4lYTvSatgBCNLjPjs2WOKVH71F3qNx0MoNkGoJik8iIRDPj20MkmlofJunwkWE-unNgtxrI8hyV6u3WJ-H_ZaH-RS1AJzn341DTuTGGG-JqlGyJHbaLNxFgBzvmyvuLnIOaDMeY-WS8eVxO1ST_pkHMrKJcylNAMmuX5tUg"
+          className="banner my-[20px] md:my-[50px] m-auto md:m-auto w-[95%] md:w-[90%] "
+          src={banner}
         />
       </div>
 
       <div className="categories-container md:ml-4 md:font-bold sm:font-bold">
-        <h2 className="m-10">All Categories</h2>
+        <h2 className="">All Categories</h2>
         <div className="categories-wrapper text-center">
           <div className="flex flex-wrap justify-center">
             <span className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 mb-4">
@@ -143,6 +153,22 @@ function Dashboard() {
           </div>
         </div>
       </div>
+
+
+      <div>my ad</div>
+
+      <div>
+      <Mydd/>
+      </div>
+
+
+    
+
+      <div><h1>
+        Api data
+        </h1></div>
+
+
 
       <div className="flex flex-wrap justify-center">
         {product.map((item, index) => {

@@ -4,10 +4,50 @@ import border from "./border.png";
 import carIcon from "./caricon.png";
 import propertyIcon from "./propertyIcon.png";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { onAuthStateChanged, signOut , getAuth } from "firebase/auth";
+import {auth} from "../../Config/firebase";
+import Modal from 'react-modal';
+import profile from './emoji.png'
 
-function Header() {
-  const navigate = useNavigate()
 
+
+function Header( {username, profilePhoto, details}) {
+  const navigate = useNavigate();
+  const [category, setCategory] = useState();
+  const [user, setUser] = useState(null);
+
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
+
+
+function signout(){
+  const auth = getAuth();
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    alert("Sign-out successful")
+  }).catch((error) => {
+    // An error happened.
+    alert(error)
+  });
+  
+}
+
+
+
+  useEffect(() => {
+    onAuthStateChanged(auth,(user)=>{
+      if(user){
+        setUser(user)
+      }else{
+        setUser(null)
+      }
+    })
+  
+  }, []);
 
   return (
     <nav className="">
@@ -18,20 +58,28 @@ function Header() {
               &#8801;
             </a>
           </div>
-          <div className="">
+          <div className="" >
             <img className="w-10" src={olx} />
           </div>
 
           <div className="flex mx-14">
-            <img className="w-6 mx-1 p-1 bg-gray-200 rounded-xl" src={carIcon} alt="" />
+            <img
+              className="w-6 mx-1 p-1 bg-gray-200 rounded-xl  "
+              src={carIcon}
+              alt=""
+            />
             <span className="mr-8">Motors</span>
-            <img className="w-6 mx-1 p-1 bg-gray-200 rounded-xl" src={propertyIcon} alt="" />
+            <img
+              className="w-6 mx-1 p-1 bg-gray-200 rounded-xl"
+              src={propertyIcon}
+              alt=""
+            />
             <span>Property</span>
           </div>
         </div>
 
-        <div className="md:flex ">
-          <div className="md:w-20 md:block hidden    ">
+        <div className="md:flex " >
+          <div className="md:w-20 md:block hidden    " >
             <img src={olxLogo} />
           </div>
           <div className="md:flex  hidden  md:space-x-2 md:m-5  ">
@@ -41,6 +89,7 @@ function Header() {
                 type="text"
                 placeholder="Search city,area or locality"
               />
+              
             </div>
             <div className="">
               <input
@@ -66,12 +115,39 @@ function Header() {
             </div>
 
             <div className="flex space-x-10 mt-3 m-auto ">
-              <div className="ml-28">
-                <button className="md:font-bold  md:border-b-2 md:border-black hover:border-hidden" onClick={()=>navigate("/")}>
+              {!user ? <div className="ml-28">
+                <button
+                  className="md:font-bold  md:border-b-2 md:border-black hover:border-hidden"
+                  onClick={() => navigate("/login")}
+                >
                   Login
                 </button>
               </div>
-              <div className="hidden md:block">
+              :
+              <div className="ml-20">
+              <img
+              id=""
+              className="w-10"
+                src={profile}
+                alt="Profile"
+                onClick={openModal}
+                style={{ cursor: 'pointer' }}
+              />
+              <Modal 
+              className="w-[90%] m-auto bg-white"
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Profile Details"
+                type="file"
+              >
+                <input type="file" name="" id="" />
+                <h2>{username}s Profile</h2>
+                <p>{details}</p>
+                <button onClick={closeModal}>Close</button>
+              </Modal>
+            </div>}
+              
+              <div className="hidden md:block" onClick={()=>navigate('/postAdd')}>
                 <button className="md:font-bold md:absolute md:top-[] md:right-[] md:translate-x-10">
                   <img className="md:w-28" src={border} />
                   <span className="md:relative md:bottom-9"> + Sell</span>
@@ -81,30 +157,27 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className="md:flex p-2 border-b-2 shadow-sm space-x-10 hidden">
-        <div className="ml-28 ">
-          <ul className="flex">
-            <li>All categories</li>
-            <div className="">
-              <svg
-                className="mr-1 ml-2 h-5 w-5 "
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 3a1 1 0 0 1 1 1v10a1 1 0 1 1-2 0V4a1 1 0 0 1 1-1zm-7.293 8.293a1 1 0 0 1 1.414-1.414L10 14.586l5.293-5.293a1 1 0 1 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-          </ul>
+      <div className="md:flex p-2 border-b-2 shadow-sm space-x-10">
+        <div className="md:ml-28 ml-5  ">
+            <select
+            className="p-1"
+              name="category"
+              onChange={(e) => {
+                setCategory(e.target.value);
+              }}
+            >
+              <option value="All Catogeries">All Catogeries</option>
+              <option value="Cars">Cars</option>
+              <option value="Cameras & Lenses">Cameras & Lenses</option>
+              <option value="Computers & Laptops">Computers & Laptops</option>
+              <option value="Mobile Phones">Mobile Phones</option>
+              <option value="Motorcycles">Motorcycles</option>
+              <option value="Tablets">Tablets</option>
+            </select>
         </div>
 
         <div className="">
-          <ul className="md:flex md:space-x-3 ">
+          <ul className="md:flex md:space-x-3 hidden ">
             <li>Mobile Phones</li>
             <li>Cars</li>
             <li>Motorcycles</li>

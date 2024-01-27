@@ -1,6 +1,6 @@
 import olxLogo from "../../Components/Header/olxlogo.png";
 import { useNavigate } from "react-router-dom";
-import  registerApp  from "../../Config/firebase";
+import { registerApp }  from "../../Config/firebase";
 import { useState } from "react";
 
 function Registered() {
@@ -9,11 +9,20 @@ function Registered() {
   const [age, setAge] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [image, setImage] = useState()
+  
 
-  function signup() {
-    registerApp({ fullName, age, email, password });
+  async function signup() {
+    try {
+      // Wait for the registration to complete before navigating
+      await registerApp({ fullName, age, email, password, image });
+      navigate('/signin');
+    } catch (error) {
+      console.error(error);
+    }
   }
-
+  
+  
   return (
     <div
       className={`fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center 
@@ -38,7 +47,7 @@ function Registered() {
           </svg>
         </div>
 
-        <div className="w-28 m-auto  ">
+        <div className="w-28 m-auto">
           <img className="" src={olxLogo} alt="" />
         </div>
         <div className="my-2">
@@ -51,7 +60,7 @@ function Registered() {
             <input
               onChange={(event) => setFullName(event.target.value)}
               className="border-2 border-black rounded-sm p-3 w-80"
-              type="text"
+              type="text" 
               placeholder="Enter Your Full Name"
             />
           </div>
@@ -81,11 +90,19 @@ function Registered() {
               placeholder="New Password"
             />
           </div>
+          <div>
+            <input 
+              onChange={(event) => setImage(event.target.files[0])}
+              className="border-2 border-black rounded-sm p-3 mt-2 w-80"
+              type="file"
+              
+            />
+          </div>
         </div>
 
         <div className="bg-gray-200 my-5 p-2 flex justify-center cursor-pointer">
-          <button className="" onClick={signup}>
-            <h1 className="">Sign In</h1>
+          <button className=""  onClick={signup}>
+            <h1 className="">Register</h1>
           </button>
         </div>
         <div className="p-3 text-sm">
@@ -96,7 +113,7 @@ function Registered() {
               onClick={() => navigate("/signin")}
             >
               Login here
-            </span>{" "}
+            </span>{""}
           </h3>
         </div>
       </div>
