@@ -1,4 +1,4 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Mydd from "../Myadd";
 
@@ -7,7 +7,7 @@ import banner from './banner.png'
 import './index.css'
 
 function Dashboard() {
-  //   const navigate = useNavigate();
+    const navigate = useNavigate();
   const [product, setProduct] = useState([]);
 
 
@@ -155,7 +155,7 @@ function Dashboard() {
       </div>
 
 
-      <div>my ad</div>
+    
 
       <div>
       <Mydd/>
@@ -164,17 +164,18 @@ function Dashboard() {
 
     
 
-      <div><h1>
-        Api data
+      <div className="text-center m-20 font-bold" ><h1>
+        Olx Ads
         </h1></div>
 
 
 
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center " >
         {product.map((item, index) => {
-          const { title, thumbnail, category } = item;
+          const {id, title, thumbnail, category } = item;
           return (
             <div
+            onClick={() => navigate(`/detail/${id}`)}
               key={index}
               className="w-[340px]  m-[10px] border border-black"
               id="btn"

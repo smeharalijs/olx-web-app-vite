@@ -1,0 +1,90 @@
+
+.body {
+    display: flex;
+    padding: 20px;
+    margin: auto;
+    justify-content: center;
+  }
+  
+  .image {
+
+    border: 2px black solid;
+    display: flex;
+    justify-content: space-between;
+
+  }
+  .main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    
+  }
+  
+  .image img {
+    width: 18%;
+    display: inline-block;
+
+  }
+  
+  .details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 2px black solid;
+    padding: 10px;
+  }
+  
+  .price,
+  .description {
+    margin-bottom: 20px;
+  }
+  
+  .price h2 {
+    color: #3a77ff;
+  }
+  
+
+  
+
+
+  
+  .btnDark,
+  .btnLight {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btnDark {
+    background-color: #002f34;
+    color: white;
+  }
+  
+  .btnLight {
+    background-color: #f7f8f8;
+    color: #002f34;
+  }
+  
+
+  .imgLib{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    border: 2px black solid;
+
+  }
+
+  .thumbnail{
+    width: 50%;
+    border: 2px solid black !important;
+
+  }
+.thumbnail img{
+  width: 90%;
+  padding: 20px;
+
+
+}

@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { getAds } from "../../Config/firebase";
+import { useNavigate } from "react-router-dom";
+
 
 function Myadd() {
   const [myproduct, setMyproduct] = useState([]);
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     getMYProduct();
@@ -20,29 +24,30 @@ function Myadd() {
 
   return (
     <>
-      <div>
-        <h1>myAdd</h1>
+      <div className="text-center m-20 font-bold">
+        <h1>Seller Ads</h1>
       </div>
 
       <div className="flex flex-wrap justify-center">
         {
  myproduct.map((item, index) => {
-            const { age, imageURL } = item;
+    console.log("item ", item);
+            const {id, title, brand, imageUrl } = item;
             return (
-              <div
+              <div onClick={()=>navigate(`/mydetail/${id}`)}
                 key={index}
                 className="w-[340px]  m-[10px] border border-black"
                 id="btn"
               >
                 <img
                   className="w-[100%] h-[200px] object-cover"
-                  src={imageURL}
+                  src={imageUrl}
                   alt="image"
                 />
                 <div className="p-[16px] bg-white text-white">
                   <div className=" text-gray-700">
-                    {age} <br />
-                    {/* {category} */}
+                    {title} <br />
+                    {brand}
                     <h6>2 days ago</h6>
                   </div>
                 </div>

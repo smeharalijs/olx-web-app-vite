@@ -15,6 +15,8 @@ import Sign from "../Views/Signin";
 import Registered from "../views/Registered";
 import PostAdd from "../Views/Postadd";
 import Myadd from '../Views/Myadd'
+import Detail from "../Views/Detail";
+import mydetail from '../Views/Mydetail'
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
         path: "/myAdd",
         element: <Myadd />,
       },
+      {
+        path: "/detail/:id",
+        element: <Detail />,
+      },
+      {
+      path: "/mydetail/:myid",
+      element: <mydetail />,
+    },
     ],
   },
 ]);

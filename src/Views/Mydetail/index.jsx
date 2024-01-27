@@ -13,10 +13,9 @@ function Detail() {
     }, []);
 
     const getApi = () => {
-        fetch(`https://dummyjson.com/products/${id}`)
-            .then(res => res.json())
-            .then(res => setDetail(res))
+      
     }
+    
 
     if (!detail) {
         return (
@@ -25,8 +24,8 @@ function Detail() {
             </div>
         );
     }
-
-    const { thumbnail, title, discountPercentage, images, price, description, brand, category, stock, rating } = detail;
+   
+    const { imageUrl,title, name, rs, brand, category, discription} = detail;
 
 
 
@@ -34,7 +33,7 @@ function Detail() {
         <div className="body">
             <div className="main">
                 <div className="thumbnail">
-                    <img src={thumbnail} alt="Thumbnail" />
+                    <img src={imageUrl} alt="Thumbnail" />
                 </div>
 
                 {/* <div className="imgLib">
@@ -43,22 +42,20 @@ function Detail() {
 
                 <div className="details">
                     <div className="price">
-                        <h2>Rs {price}</h2>
+                        <h2>Rs {rs}</h2>
                     </div>
 
                     <div className="detail">
                         <h3>Details</h3>
+                        <p><strong>Seller Name :    </strong>{name}</p>
                         <p><strong>Title :    </strong>{title}</p>
                         <p><strong>Brand :    </strong>{brand}</p>
                         <p><strong>Category : </strong>{category}</p>
-                        <p><strong>Stock : </strong>{stock}</p>
-                        <p><strong>Rating :</strong>{rating}</p>
-                        <p><strong>Discount :</strong>{discountPercentage}</p>
                     </div>
 
                     <div className="description">
                         <h3 className="font-bold" >Description</h3>
-                        <p>{description}</p>
+                        <p>{discription}</p>
                     </div>
                 
                 </div>
